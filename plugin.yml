@@ -1,0 +1,22 @@
+name: "KoreanPoker"
+version: 1.0
+author: Joe2357
+description: "Hand shake and play Korean Poker"
+
+main: koreanpoker.Main
+
+commands:
+  koreanpoker:
+    description: "Play game of Korean Poker"
+    aliases: [koreanpoker, kp]
+    permission: koreanpoker.gamemanage
+    permission-message: "You do not have permission koreanpoker.gamemanage"
+    
+permissions:
+  koreanpoker.*:
+    description: "Gives access to all KoreanPoker commands"
+    children:
+      koreanpoker.gamemanage: true
+  koreanpoker.gamemanage:
+    description: Allows you to manage game status
+    default: op

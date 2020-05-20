@@ -1,6 +1,6 @@
 package koreanpoker;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -12,36 +12,37 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class MyPlayer {
 	private Player user;
 	private int[] hand = new int[3];
-	private String[] template = { "1æœˆ", "2æœˆ", "3æœˆ", "4æœˆ", "5æœˆ", "6æœˆ", "7æœˆ", "8æœˆ", "9æœˆ", "10æœˆ", "1å…‰", "ë§¤ì¡° ( 2 )", "3å…‰",
-			"í‘ì‹¸ë¦¬ ( 4 )", "ì´ˆ ( 5 )", "ëª©ë‹¨ ( 6 )", "í™ì‹¸ë¦¬ ( 7 )", "8å…‰", "êµ­ì§„ ( 9 )", "í’ ( 10 )", };
+	private static final List<String> loreList = Arrays.asList("¡×f¼¸´Ù ÆĞ");
+	private static final String[] handTemplate = { "1êÅ", "2êÅ", "3êÅ", "4êÅ", "5êÅ", "6êÅ", "7êÅ", "8êÅ", "9êÅ", "10êÅ", "1ÎÃ",
+			"¸ÅÁ¶ ( 2 )", "3ÎÃ", "Èæ½Î¸® ( 4 )", "ÃÊ ( 5 )", "¸ñ´Ü ( 6 )", "È«½Î¸® ( 7 )", "8ÎÃ", "±¹Áø ( 9 )", "Ç³ ( 10 )" };
 
 	public MyPlayer(Player sender) {
 		user = sender;
-		hand[0] = -1;
-		hand[1] = -1;
-		hand[2] = -1;
+		handClear();
+	}
+
+	public void handClear() {
+		for (int i = 0; i < 3; i++)
+			hand[i] = -1;
 	}
 
 	public void setHand(int index, int input) {
 		hand[index] = input;
-		return;
 	}
 
 	public void giveHand() {
-		List<String> loreList = new ArrayList<String>();
-		loreList.add("Â§fì„¯ë‹¤ íŒ¨");
 		for (int i = 0; i < 3; i++) {
 			if (hand[i] < 0)
 				return;
-			user.getInventory().addItem(setItem(new ItemStack(Material.PAPER), template[hand[i]], loreList));
+			user.getInventory().addItem(setItem(new ItemStack(Material.PAPER), handTemplate[hand[i]]));
 		}
 	}
 
-	private ItemStack setItem(ItemStack itemStack, String name, List<String> lore) {
+	private ItemStack setItem(ItemStack itemStack, String name) {
 		ItemMeta myItemMeta = itemStack.getItemMeta();
 		myItemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, 0, true);
 		myItemMeta.setDisplayName(name);
-		myItemMeta.setLore(lore);
+		myItemMeta.setLore(loreList);
 		itemStack.setItemMeta(myItemMeta);
 		return itemStack;
 	}
