@@ -1,5 +1,5 @@
 name: "KoreanPoker"
-version: 1.0
+version: 1.1
 author: Joe2357
 description: "Hand shake and play Korean Poker"
 
@@ -9,6 +9,9 @@ commands:
   koreanpoker:
     description: "Play game of Korean Poker"
     aliases: [koreanpoker, kp]
+    usage: |+
+          '/<command> reset'    to reset the game
+          '/<command> start [2 / 3]'    to start 2 / 3 games
     permission: koreanpoker.gamemanage
     permission-message: "You do not have permission koreanpoker.gamemanage"
     
