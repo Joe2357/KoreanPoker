@@ -10,6 +10,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		enableMessage();
 		getCommand("koreanpoker").setExecutor(new HandClass());
+		getCommand("koreanpoker").setTabCompleter(new CommandTabCompletion());
 	}
 	
 	@Override
