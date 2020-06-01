@@ -1,9 +1,9 @@
 name: "KoreanPoker"
-version: 1.1
+version: 1.2
 author: Joe2357
 description: "Hand shake and play Korean Poker"
 
-main: koreanpoker.Main
+main: Main.Main
 
 commands:
   koreanpoker:
@@ -14,7 +14,9 @@ commands:
           '/<command> start [2 / 3]'    to start 2 / 3 games
     permission: koreanpoker.gamemanage
     permission-message: "You do not have permission koreanpoker.gamemanage"
-    
+  test:
+    description: "temp usage"
+
 permissions:
   koreanpoker.*:
     description: "Gives access to all KoreanPoker commands"
