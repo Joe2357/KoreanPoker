@@ -12,13 +12,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class MyPlayer {
 	private Player user;
 	private int[] hand = new int[3];
+	private int money;
 	private static final List<String> loreList = Arrays.asList("°◊fº∏¥Ÿ ∆–");
 	private static final String[] handTemplate = { "1Í≈", "2Í≈", "3Í≈", "4Í≈", "5Í≈", "6Í≈", "7Í≈", "8Í≈", "9Í≈", "10Í≈", "1Œ√",
 			"∏≈¡∂ ( 2 )", "3Œ√", "»ÊΩŒ∏Æ ( 4 )", "√  ( 5 )", "∏Ò¥‹ ( 6 )", "»´ΩŒ∏Æ ( 7 )", "8Œ√", "±π¡¯ ( 9 )", "«≥ ( 10 )" };
 
 	public MyPlayer(Player sender) {
 		user = sender;
+		money = 100;
 		handClear();
+	}
+
+	public void addMoney(int value) {
+		money += value;
+		// not yet
+		// change scoreboard
 	}
 
 	public void handClear() {
