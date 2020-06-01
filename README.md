@@ -12,6 +12,10 @@
   ![Plugin_Enable](./picture/PluginEnable.png)
 
 ## 게임 진행
+
+## Abandoned ( 폐기 )
+### Version 1.1
+#### 게임 진행
   1. 패 나눠주기 ( 2장 or 3장 )  
   ![Hand3](./picture/Hand_3.png)
     - 총 20장의 패 중에서 겹치지 않게 *2개* 또는 *3개*씩 패를 나눠줌
