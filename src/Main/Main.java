@@ -2,11 +2,11 @@ package Main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import Command.GetCommand;
+import Command.PlayGame;
 import Scoreboard.Scoreboard;
 
 /**
@@ -16,11 +16,13 @@ import Scoreboard.Scoreboard;
  */
 public class Main extends JavaPlugin {
 
+	private static PlayGame game;
+
 	@Override
 	public void onEnable() {
 		enableMessage();
+		game = null;
 		getCommand("koreanpoker").setExecutor(new GetCommand());
-		getCommand("test").setExecutor(new GetCommand());
 		return;
 	}
 
@@ -29,6 +31,17 @@ public class Main extends JavaPlugin {
 		Scoreboard.deleteScoreBoard();
 		disableMessage();
 		return;
+	}
+
+	// game object set method
+	public static void setGame(PlayGame p) {
+		game = p;
+		return;
+	}
+
+	// game object get method
+	public static PlayGame getGame() {
+		return game;
 	}
 
 	public void enableMessage() {

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Scoreboard.Scoreboard;
+import Main.Main;
 
 /**
  * User input command section to play Korean Poker
@@ -21,15 +21,39 @@ public class GetCommand implements CommandExecutor {
 			if (args.length == 0) { // no arguments?
 				getHelp((Player) sender); // call help method
 				return true;
-			} else if (args.length == 1) { // argument is 1
-				// TODO get user input & reset or start game
+			} else { // argument is exists
+				if (args[0].equals("reset")) { // reset game
+					if (Main.getGame() != null) { // if exists, reset
+						Main.setGame(null);
+						return true;
+					} else { // no game object exists
+						sender.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker"
+								+ ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " 게임이 실행되지 않았습니다! 먼저 게임을 실행해 주십시오\n");
+						return true;
+					}
+				} else if (args[0].equals("start")) { // start game
+					if (args.length == 1) { // "/kp start"
+						sender.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker"
+								+ ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " 잘못된 명령어입니다! 숫자를 입력해주세요\n");
+						return true;
+					} else {
+						if (args[1].equals("2")) { // "/kp start 2"
+							Main.setGame(new PlayGame(2));
+							Main.getGame().startGame();
+							return true;
+						} else if (args[1].equals("3")) { // "/kp start 3"
+							Main.setGame(new PlayGame(3));
+							Main.getGame().startGame();
+							return true;
+						} else { // Invalid integer
+							sender.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker"
+									+ ChatColor.DARK_AQUA + "]" + ChatColor.WHITE + " 입력이 잘못되었습니다! 2 또는 3을 입력해주세요\n");
+							return true;
+						}
+					}
+				}
 				return true;
 			}
-		} else if (command.equals("test")) { // only for test purpose
-			Scoreboard.createScoreBoard();
-			PlayGame.resetGame();
-			Scoreboard.setScoreBoard();
-			return true;
 		}
 		return true;
 	}

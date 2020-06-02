@@ -19,6 +19,11 @@ public class Hand {
 	private static final String[] handTemplate = { "1Í≈", "2Í≈", "3Í≈", "4Í≈", "5Í≈", "6Í≈", "7Í≈", "8Í≈", "9Í≈", "10Í≈", "1Œ√",
 			"∏≈¡∂ ( 2 )", "3Œ√", "»ÊΩŒ∏Æ ( 4 )", "√  ( 5 )", "∏Ò¥‹ ( 6 )", "»´ΩŒ∏Æ ( 7 )", "8Œ√", "±π¡¯ ( 9 )", "«≥ ( 10 )" };
 
+	// handTemplate get method
+	public static String[] getHandTemplate() {
+		return handTemplate;
+	}
+	
 	// method that gives players a card ( hand )
 	public static void giveHand(Player p, int hand) {
 		ItemStack item = makeItem(hand);

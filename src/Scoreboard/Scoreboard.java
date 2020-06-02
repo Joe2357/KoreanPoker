@@ -8,7 +8,7 @@ import Player.MyPlayer;
 /**
  * Java Class to display money of all players
  * 
- * @author user
+ * @author Joe2357
  */
 public class Scoreboard {
 
@@ -24,7 +24,7 @@ public class Scoreboard {
 	public static void setScoreBoard() {
 		for (MyPlayer mp : PlayGame.getPlayerList()) {
 			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-					String.format("scoreboard players set %s money %d", mp.getPlayer().getName(), mp.getMoney()));
+					String.format("scoreboard players set %s money %d", mp.getPlayer().getName(), 0)); // mp.getMoney()));
 		}
 	}
 
