@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import Algorithm.MyHandGrade;
+import Algorithm.CombinationTemplate;
 import Player.MyPlayer;
 import Scoreboard.Scoreboard;
 import Hand.Hand;
@@ -64,12 +64,16 @@ public class PlayGame {
 
 		// game section
 		while (playerList.size() > 1) {
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "clear @a minecraft:paper"); // clear all emeralds
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "clear @a minecraft:paper"); // clear all hands
 			doingTurn();
 
 			// TODO make betting method
+			
+			// TODO make player to choose one combination of their hands
 
-			// TODO calculate who is winner of this game
+			// TODO calculate who is the winner of this game
+			
+			// TODO give and take money from players
 
 			// check dead person
 			for (MyPlayer mp : playerList) {
@@ -126,7 +130,7 @@ public class PlayGame {
 			mp.addUsingMoney(1);
 			mp.getPlayer().getInventory().remove(new ItemStack(Material.EMERALD, 1));
 
-			List<String> tempList = new MyHandGrade().getMyGrade(mp);
+			List<String> tempList = new CombinationTemplate().getMyGrade(mp);
 			mp.getPlayer().sendMessage(tempList.toArray(new String[tempList.size()])); // send which grade of hand do I
 																						// have?
 		}
