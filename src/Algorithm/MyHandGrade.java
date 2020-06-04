@@ -26,6 +26,7 @@ public class MyHandGrade {
 		List<String> retval = new ArrayList<String>();
 		retval.add("");
 		retval.add("§f------------------------------");
+		retval.add("§3[§bKoreanPoker§3] §f손패 조합 결과");
 		for (int i = 0; i < 20; i++) { // brute force
 			for (int j = i + 1; j < 20; j++) {
 				if (mp.getHand()[i] && mp.getHand()[j]) { // if player has that card

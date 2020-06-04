@@ -13,8 +13,8 @@ public class MyPlayer {
 	private static final int DEPOSIT = 30;
 	private Player player; // object master
 	private boolean[] myHand = new boolean[20];
-	// private int money; // how many emeralds this player have?
-	// private int usingMoney; // used money in the pot in this turn
+	private int money; // how many emeralds this player have?
+	private int usingMoney; // used money in the pot in this turn
 
 	// constructor ( first initial )
 	public MyPlayer(Player p) {
@@ -22,9 +22,9 @@ public class MyPlayer {
 		for (int i = 0; i < 20; i++) {
 			myHand[i] = false;
 		}
-		// money = DEPOSIT;
-		// player.getInventory().addItem(new ItemStack(Material.EMERALD, DEPOSIT));
-		// usingMoney = 0;
+		money = DEPOSIT;
+		player.getInventory().addItem(new ItemStack(Material.EMERALD, DEPOSIT));
+		usingMoney = 0;
 		return;
 	}
 
@@ -33,7 +33,6 @@ public class MyPlayer {
 		return player;
 	}
 
-	/*
 	// money get method
 	public int getMoney() {
 		return money;
@@ -63,10 +62,10 @@ public class MyPlayer {
 	}
 
 	// check whether player use all money
+
 	public boolean isDead() {
 		return money <= 0;
 	}
-	*/
 
 	// remove all hands from player
 	public void resetHand() {

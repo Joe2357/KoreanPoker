@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import Algorithm.MyHandGrade;
 import Player.MyPlayer;
@@ -25,16 +27,17 @@ public class PlayGame {
 	// constructor
 	public PlayGame(int mode) {
 		gameMode = mode;
+		initGame();
 		return;
 	}
 
-	// playerlist get method
+	// player list get method
 	public static List<MyPlayer> getPlayerList() {
 		return playerList;
 	}
 
-	// reset all the games
-	public void resetGame() {
+	// initial all the games
+	public void initGame() {
 		Scoreboard.deleteScoreBoard();
 		playerList.clear(); // remove all objects
 		for (Player p : Bukkit.getOnlinePlayers()) { // add all players to the ArrayList
@@ -45,7 +48,7 @@ public class PlayGame {
 
 	// command that starts Korean Poker
 	public void startGame() {
-		resetGame(); // reset before start game
+		initGame(); // reset before start game
 
 		if (playerList.size() * gameMode > 20) { // out of range
 			for (MyPlayer mp : playerList) {
@@ -59,27 +62,38 @@ public class PlayGame {
 		Scoreboard.createScoreBoard();
 		Scoreboard.setScoreBoard();
 
-		// game section while (playerList.size() > 1) {
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "clear @a minecraft:paper"); // clear all emeralds
-		doingTurn();
+		// game section
+		while (playerList.size() > 1) {
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "clear @a minecraft:paper"); // clear all emeralds
+			doingTurn();
 
-		/*
-		 * // check dead person for (MyPlayer mp : playerList) { if (mp.isDead()) { for
-		 * (Player p : Bukkit.getOnlinePlayers()) { // print he was dead
-		 * p.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" +
-		 * ChatColor.DARK_AQUA + "] " + ChatColor.GREEN +
-		 * playerList.get(0).getPlayer().getName() + ChatColor.RED + " 님이 파산하였습니다..\n");
-		 * } playerList.remove(mp); // remove him from player list } }
-		 * Scoreboard.setScoreBoard(); }
-		 * 
-		 * // print result for (Player p : Bukkit.getOnlinePlayers()) {
-		 * p.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" +
-		 * ChatColor.DARK_AQUA + "] " + ChatColor.GREEN +
-		 * playerList.get(0).getPlayer().getName() + ChatColor.WHITE +
-		 * " 님이 우승하였습니다!\n"); }
-		 */
+			// TODO make betting method
+
+			// TODO calculate who is winner of this game
+
+			// check dead person
+			for (MyPlayer mp : playerList) {
+				if (mp.isDead()) {
+					for (Player p : Bukkit.getOnlinePlayers()) { // print he was dead
+						p.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" + ChatColor.DARK_AQUA
+								+ "] " + ChatColor.GREEN + playerList.get(0).getPlayer().getName() + ChatColor.RED
+								+ " 님이 파산하였습니다..\n");
+					}
+					playerList.remove(mp); // remove him from player list
+				}
+			}
+
+			Scoreboard.setScoreBoard();
+		}
+
+		// print result
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			p.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" + ChatColor.DARK_AQUA + "] "
+					+ ChatColor.GREEN + playerList.get(0).getPlayer().getName() + ChatColor.WHITE + " 님이 우승하였습니다!\n");
+		}
 
 		return;
+
 	}
 
 	// doing 1 turn of Korean Poker
@@ -90,11 +104,14 @@ public class PlayGame {
 			isUsed[i] = false;
 		}
 
-		// hand serving
+		// player first initial
 		for (MyPlayer mp : playerList) {
+
 			mp.resetHand(); // clear hands
-			// mp.setUsingMoney(0);
-			for (int i = 0; i < gameMode; i++) { // give hands
+			mp.setUsingMoney(0);
+
+			// serve hand
+			for (int i = 0; i < gameMode; i++) {
 				int rnd;
 				do {
 					rnd = (int) (Math.random() * 20);
@@ -105,9 +122,9 @@ public class PlayGame {
 			}
 
 			// push 1 emeralds in pot
-			// mp.addMoney(-1);
-			// mp.addUsingMoney(1);
-			// mp.getPlayer().getInventory().remove(new ItemStack(Material.EMERALD, 1));
+			mp.addMoney(-1);
+			mp.addUsingMoney(1);
+			mp.getPlayer().getInventory().remove(new ItemStack(Material.EMERALD, 1));
 
 			List<String> tempList = new MyHandGrade().getMyGrade(mp);
 			mp.getPlayer().sendMessage(tempList.toArray(new String[tempList.size()])); // send which grade of hand do I
@@ -115,11 +132,6 @@ public class PlayGame {
 		}
 
 		Scoreboard.setScoreBoard();
-
-		// TODO betting
-		// but not in the prototype
-
-		// TODO check who is winner, get Algorithm
 		return;
 	}
 }
