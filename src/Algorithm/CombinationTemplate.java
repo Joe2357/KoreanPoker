@@ -3,6 +3,8 @@ package Algorithm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+
 import Player.MyPlayer;
 import Hand.Hand;
 
@@ -11,11 +13,11 @@ import Hand.Hand;
  * 
  * @author Joe2357
  */
-public class MyHandGrade {
+public class CombinationTemplate {
 	private static String[][] pair;
 
 	// constructor
-	public MyHandGrade() {
+	public CombinationTemplate() {
 		pair = new String[20][20];
 		setPair();
 		return;
@@ -25,8 +27,9 @@ public class MyHandGrade {
 	public List<String> getMyGrade(MyPlayer mp) {
 		List<String> retval = new ArrayList<String>();
 		retval.add("");
-		retval.add("§f------------------------------");
-		retval.add("§3[§bKoreanPoker§3] §f손패 조합 결과");
+		retval.add("------------------------------");
+		retval.add(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" + ChatColor.DARK_AQUA + "]"
+				+ ChatColor.WHITE + " 손패 조합 결과");
 		for (int i = 0; i < 20; i++) { // brute force
 			for (int j = i + 1; j < 20; j++) {
 				if (mp.getHand()[i] && mp.getHand()[j]) { // if player has that card
@@ -35,7 +38,7 @@ public class MyHandGrade {
 				}
 			}
 		}
-		retval.add("§f------------------------------");
+		retval.add("------------------------------");
 		return retval;
 	}
 
