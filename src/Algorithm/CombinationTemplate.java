@@ -24,19 +24,28 @@ public class CombinationTemplate {
 	}
 
 	// method that calculate result hands
-	public List<String> getMyGrade(MyPlayer mp) {
+	public static List<String> getMyGrade(MyPlayer mp) {
 		List<String> retval = new ArrayList<String>();
-		retval.add("");
-		retval.add("------------------------------");
-		retval.add(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" + ChatColor.DARK_AQUA + "]"
-				+ ChatColor.WHITE + " ÏÜêÌå® Ï°∞Ìï© Í≤∞Í≥º");
 		for (int i = 0; i < 20; i++) { // brute force
 			for (int j = i + 1; j < 20; j++) {
 				if (mp.getHand()[i] && mp.getHand()[j]) { // if player has that card
-					retval.add("    " + Hand.getHandTemplate()[i] + " + " + Hand.getHandTemplate()[j] + " -> "
-							+ pair[i][j]);
+					retval.add(pair[i][j]);
 				}
 			}
+		}
+		return null;
+	}
+
+	// method that send message to player
+	public List<String> sendMyGrade(MyPlayer mp) {
+		List<String> retval = new ArrayList<String>();
+		List<String> getResult = getMyGrade(mp);
+		retval.add("");
+		retval.add("------------------------------");
+		retval.add(ChatColor.DARK_AQUA + "[" + ChatColor.AQUA + "KoreanPoker" + ChatColor.DARK_AQUA + "]"
+				+ ChatColor.WHITE + " º’∆– ¡∂«’ ∞·∞˙");
+		for (String str : getResult) { // add string list
+			retval.add("    " + str);
 		}
 		retval.add("------------------------------");
 		return retval;
@@ -46,38 +55,38 @@ public class CombinationTemplate {
 	public void setPair() {
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				// first initial ( ÎÅó )
-				pair[i][j] = String.format("%dÎÅó", (i + j + 2) % 10);
-				if (pair[i][j].equals("0ÎÅó")) {
-					pair[i][j] = "ÎßùÌÜµ";
-				} else if (pair[i][j].equals("9ÎÅó")) {
-					pair[i][j] = "Í∞ëÏò§";
+				// first initial ( ≤˝ )
+				pair[i][j] = String.format("%d≤˝", (i + j + 2) % 10);
+				if (pair[i][j].equals("0≤˝")) {
+					pair[i][j] = "∏¡≈Î";
+				} else if (pair[i][j].equals("9≤˝")) {
+					pair[i][j] = "∞©ø¿";
 				}
 				if (i % 10 == j % 10) {
-					pair[i][j] = String.format("%dÎï°", i % 10 + 1);
+					pair[i][j] = String.format("%d∂Ø", i % 10 + 1);
 					if (i % 10 + 1 == 10) {
-						pair[i][j] = "Ïû•Îï°";
+						pair[i][j] = "¿Â∂Ø";
 					}
 				}
 			}
 		}
 
-		// stronger than ÎÅó
-		pair[12][17] = "38Í¥ëÎï°";
-		pair[10][17] = "18Í¥ëÎï°";
-		pair[10][12] = "13Í¥ëÎï°";
-		pair[0][1] = pair[0][11] = pair[1][10] = pair[10][11] = "ÏïåÎ¶¨";
-		pair[0][3] = pair[0][13] = pair[3][10] = pair[10][13] = "ÎèÖÏÇ¨";
-		pair[0][8] = pair[0][18] = pair[8][10] = pair[10][18] = "Íµ¨ÏÇ•";
-		pair[0][9] = pair[0][19] = pair[9][10] = pair[10][19] = "Ïû•ÏÇ•";
-		pair[3][9] = pair[3][19] = pair[9][13] = pair[13][19] = "Ïû•ÏÇ¨";
-		pair[3][5] = pair[3][15] = pair[5][13] = pair[13][15] = "ÏÑ∏Î•ô";
+		// stronger than ≤˝
+		pair[12][17] = "38±§∂Ø";
+		pair[10][17] = "18±§∂Ø";
+		pair[10][12] = "13±§∂Ø";
+		pair[0][1] = pair[0][11] = pair[1][10] = pair[10][11] = "æÀ∏Æ";
+		pair[0][3] = pair[0][13] = pair[3][10] = pair[10][13] = "µ∂ªÁ";
+		pair[0][8] = pair[0][18] = pair[8][10] = pair[10][18] = "±∏ªÊ";
+		pair[0][9] = pair[0][19] = pair[9][10] = pair[10][19] = "¿ÂªÊ";
+		pair[3][9] = pair[3][19] = pair[9][13] = pair[13][19] = "¿ÂªÁ";
+		pair[3][5] = pair[3][15] = pair[5][13] = pair[13][15] = "ºº∑˙";
 
 		// special combination
-		pair[13][16] = "ÏïîÌñâÏñ¥ÏÇ¨";
-		pair[12][16] = "Îï°Ïû°Ïù¥";
-		pair[13][18] = "Î©çÍµ¨ÏÇ¨";
-		pair[3][8] = pair[3][18] = pair[8][13] = "Íµ¨ÏÇ¨";
+		pair[13][16] = "æœ«‡æÓªÁ";
+		pair[12][16] = "∂Ø¿‚¿Ã";
+		pair[13][18] = "∏€±∏ªÁ";
+		pair[3][8] = pair[3][18] = pair[8][13] = "±∏ªÁ";
 		return;
 	}
 }

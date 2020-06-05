@@ -32,4 +32,9 @@ public class HandGrade {
 		}
 		return;
 	}
+	
+	// player list get method
+	public List<MyPlayer> getPlayerList(){
+		return hadPlayer;
+	}
 }

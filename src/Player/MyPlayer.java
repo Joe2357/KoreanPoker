@@ -1,8 +1,14 @@
 package Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import Algorithm.CombinationTemplate;
+import Algorithm.HandGrade;
 
 /**
  * Player Object that playing Korean Poker
@@ -15,6 +21,7 @@ public class MyPlayer {
 	private boolean[] myHand = new boolean[20];
 	private int money; // how many emeralds this player have?
 	private int usingMoney; // used money in the pot in this turn
+	private List<String> comb = new ArrayList<String>();
 
 	// constructor ( first initial )
 	public MyPlayer(Player p) {
@@ -84,5 +91,18 @@ public class MyPlayer {
 	// myHand get method
 	public boolean[] getHand() {
 		return myHand;
+	}
+
+	// Combination set method
+	public void setComb() {
+		comb = CombinationTemplate.getMyGrade(this);
+		return;
+	}
+
+	// send message to player
+	public void printComb() {
+		List<String> temp = new CombinationTemplate().sendMyGrade(this);
+		player.sendMessage(temp.toArray(new String[temp.size()]));
+		return;
 	}
 }

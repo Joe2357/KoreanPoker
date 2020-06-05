@@ -130,9 +130,8 @@ public class PlayGame {
 			mp.addUsingMoney(1);
 			mp.getPlayer().getInventory().remove(new ItemStack(Material.EMERALD, 1));
 
-			List<String> tempList = new CombinationTemplate().getMyGrade(mp);
-			mp.getPlayer().sendMessage(tempList.toArray(new String[tempList.size()])); // send which grade of hand do I
-																						// have?
+			mp.setComb();
+			mp.printComb();
 		}
 
 		Scoreboard.setScoreBoard();

@@ -1,22 +1,23 @@
 package Algorithm;
 
+import java.util.List;
+
+import Command.PlayGame;
+import Player.MyPlayer;
+
 /**
  * What is it?
  * 
  * @author Joe2357
  */
 public class Winner {
-	private HandGrade choosedComb[] = new HandGrade[33];
+	private static final int maxIndex = 33;
+	private HandGrade choosedComb[] = new HandGrade[maxIndex];
 
 	// constructor
 	public Winner() {
 		// Grade first initial
 		setName();
-		
-		// TODO get All choosed combination from player
-		
-		// TODO check who is winner, and return Myplayer object
-		
 		return;
 	}
 
@@ -55,5 +56,40 @@ public class Winner {
 		choosedComb[32].setNameOfComb("备荤");
 
 		return;
+	}
+
+	// get winner list method
+	public List<MyPlayer> getWinner() {
+		for (int i = 0; i < 29; i++) { // loop all combination ( exception will be handled if statements
+			if (choosedComb[i].getPlayerList().size() > 0) { // there is some players that have this combination
+				if (i == 1 || i == 2) { // 13堡动 or 18堡动
+					if (choosedComb[29].getPlayerList().size() > 0) { // if there a player that has "鞠青绢荤"
+						return choosedComb[29].getPlayerList(); // Jackpot!
+					} else {
+						return choosedComb[i].getPlayerList();
+					}
+				} else if (i >= 4 && i < 13) { // 9动 ~ 1动
+					if (choosedComb[30].getPlayerList().size() > 0) { // if there a player that has "动棱捞"
+						return choosedComb[30].getPlayerList(); // Jackpot!
+					} else if (choosedComb[31].getPlayerList().size() > 0) { // if there a player that has "港备荤"
+						return PlayGame.getPlayerList(); // all player have to re-game
+					} else {
+						return choosedComb[i].getPlayerList();
+					}
+				} else if (choosedComb[32].getPlayerList().size() > 0) { // if there a player that has "备荤"
+					return PlayGame.getPlayerList(); // all player have to re-game
+				} else { // they are winners
+					return choosedComb[i].getPlayerList();
+				}
+			}
+		}
+		return null;
+	}
+
+	// TODO what is this method?
+	public void temp() {
+
+		// TODO get All choosed combination from player
+
 	}
 }
